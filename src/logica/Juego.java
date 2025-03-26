@@ -4,38 +4,42 @@ public class Juego {
 	private Grilla grilla;
 	private int turnos;
 	private int record = Integer.MAX_VALUE;
-	
 
 	public Juego(int tamaño) {
-        grilla = new Grilla(tamaño);
-        turnos = 0;
-    }
+		grilla = new Grilla(tamaño);
+		turnos = 0;
+	}
+
 	public void jugarTurno(int fila, int columna) {
 		grilla.tocarCelda(fila, columna);
 		turnos++;
+
+		/*
+		 * if (grilla.estaCompleta() && turnos < record) { record = turnos; }
+		 */
 	}
-	
+
 	public boolean estaCompleta() {
 		return grilla.estaCompleta();
 	}
-	
+
 	public int getTurnos() {
 		return turnos;
 	}
-	
+
 	public int getRecord() {
-	    return record;
+		return record;
 	}
-	
+
 	public void actualizarRecord() {
-	    if (estaCompleta() && turnos < record) {
-	        record = turnos;
-	    }
+		if (estaCompleta() && turnos < record) {
+			record = turnos;
+		}
 	}
-	
+
 	// ???
 	public int getColorCelda(int fila, int columna) {
-        return grilla.getColorCelda(fila, columna);
-    }
-	
+		return grilla.getColorCelda(fila, columna);
+	}
+
 }

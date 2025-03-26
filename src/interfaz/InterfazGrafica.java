@@ -25,10 +25,9 @@ public class InterfazGrafica {
 	/**
 	 * Launch the application.
 	 */
-	//Borre el main ya que no hace falta
-	/**
-	 * Create the application.
-	 */
+	// Borre el main ya que no hace falta
+
+	// Create the application.
 	public InterfazGrafica(String jugador, int tamaño) {
 		this.jugador = jugador;
 		this.tamaño = tamaño;
@@ -36,53 +35,51 @@ public class InterfazGrafica {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	// Initialize the contents of the frame.
 	private void initialize() {
 		frame = new JFrame("Locura Cromática - Jugador: " + jugador);
 		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
+		frame.setLocationRelativeTo(null);// aparezca la ventana en el medio
 		frame.setLayout(new BorderLayout());
 
-		// creo la matriz con los botones correspondientes
+		// Creo la matriz con los botones correspondientes
 		JPanel panelGrilla = new JPanel(new GridLayout(tamaño, tamaño));
 		botones = new JButton[tamaño][tamaño];
-		
+
 		for (int i = 0; i < tamaño; i++) {
-            for (int j = 0; j < tamaño; j++) {
-                botones[i][j] = new JButton();
-                botones[i][j].setBackground(Color.LIGHT_GRAY);
-                final int fila = i;
-                final int columna = j;
+			for (int j = 0; j < tamaño; j++) {
+				botones[i][j] = new JButton();
+				botones[i][j].setBackground(Color.LIGHT_GRAY);
+				final int fila = i;
+				final int columna = j;
 
-                // le agrego la accion a los botones
-                botones[i][j].addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        juego.jugarTurno(fila, columna);
-                        actualizarGrilla();
-                        actualizarLabels();
-                    }
-                });
+				// Le agrego la accion a los botones
+				botones[i][j].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						juego.jugarTurno(fila, columna);
+						actualizarGrilla();
+						actualizarLabels();
+					}
+				});
 
-                panelGrilla.add(botones[i][j]);
-            }
-        }
+				panelGrilla.add(botones[i][j]);
+			}
+		}
 
 		JPanel panelInfo = new JPanel();
-        labelTurnos = new JLabel("Turnos: 0");
-        //labelRecord = new JLabel("Récord: -");
-        panelInfo.add(labelTurnos);
-        //panelInfo.add(labelRecord);
+		labelTurnos = new JLabel("Turnos: 0");
+		// labelRecord = new JLabel("Récord: -");
+		panelInfo.add(labelTurnos);
+		// panelInfo.add(labelRecord);
 
-        frame.add(panelGrilla, BorderLayout.CENTER);
-        frame.add(panelInfo, BorderLayout.SOUTH);
+		frame.add(panelGrilla, BorderLayout.CENTER);
+		frame.add(panelInfo, BorderLayout.SOUTH);
 
-	        frame.setVisible(true);
-	    }
+		frame.setVisible(true);
+	}
 
-	// necesario para mostrar los colores de las celdas
+	// Necesario para mostrar los colores de las celdas
 	private void actualizarGrilla() {
 		for (int i = 0; i < tamaño; i++) {
 			for (int j = 0; j < tamaño; j++) {
@@ -92,12 +89,13 @@ public class InterfazGrafica {
 		}
 	}
 
-	  private void actualizarLabels() {
-	        labelTurnos.setText("Turnos: " + juego.getTurnos());
-	        //int record = juego.getRecord();
-	        //labelRecord.setText("Récord: " + (record == Integer.MAX_VALUE ? "-" : record));
-	    }
-	
+	private void actualizarLabels() {
+		labelTurnos.setText("Turnos: " + juego.getTurnos());
+		// int record = juego.getRecord();
+		// labelRecord.setText("Récord: " + (record == Integer.MAX_VALUE ? "-" :
+		// record));
+	}
+
 	private Color obtenerColor(int valor) {
 		Color[] colores = { Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.PINK };
 		return valor == -1 ? Color.LIGHT_GRAY : colores[valor];
