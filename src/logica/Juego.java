@@ -19,12 +19,13 @@ public class Juego {
 		return grilla.estaCompleta();
 	}
 	
-	public int getColorCelda(int fila, int columna) {
-        return grilla.getColorCelda(fila, columna);
-    }
-	
 	public int getTurnos() {
 		return turnos;
 	}
+	
+	// ???
+	public int getColorCelda(int fila, int columna) {
+        return grilla.getColorCelda(fila, columna);
+    }
 	
 }

@@ -69,6 +69,7 @@ public class Grilla {
         return fila >= 0 && fila < tamaño && columna >= 0 && columna < tamaño;
     }
     
+    // ???
     public int getColorCelda(int fila, int columna) {
         return celdas[fila][columna].getColor();
     }

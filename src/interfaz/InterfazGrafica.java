@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 import logica.Juego;
 
 public class InterfazGrafica {
-
 	private JFrame frame;
+	
 	private JButton[][] botones;
 	private static final int tamaño = 5;
 	private Juego juego;
