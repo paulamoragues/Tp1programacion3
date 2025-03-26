@@ -15,11 +15,6 @@ public class Grilla {
     }
 
     public void tocarCelda(int fila, int columna) {
-    	// provisorio, para que no salte error cuando ingresas numero fuera del rango
-        if (fila < 0 || fila >= tamaño || columna < 0 || columna >= tamaño) {
-            return;
-        }
-
         Celda celda = celdas[fila][columna];
         celda.cambiarColor();
 
@@ -74,14 +69,8 @@ public class Grilla {
         return fila >= 0 && fila < tamaño && columna >= 0 && columna < tamaño;
     }
     
-    // no va ..
-    // provisorio, para probar el juego por terminal
-    public void mostrarGrilla() {
-        for (int i = 0; i < tamaño; i++) {
-            for (int j = 0; j < tamaño; j++) {
-                System.out.print(celdas[i][j].getColor() + " ");
-            }
-            System.out.println();
-        }
+    public int getColorCelda(int fila, int columna) {
+        return celdas[fila][columna].getColor();
     }
+    
 }
