@@ -25,7 +25,7 @@ public class InterfazGrafica {
 	/**
 	 * Launch the application.
 	 */
-
+	//Borre el main ya que no hace falta
 	/**
 	 * Create the application.
 	 */
