@@ -26,15 +26,14 @@ public class InterfazGrafica {
 	private Juego juego;
 	private String jugador;
 
-
 	// Create the application.
 	public InterfazGrafica(String jugador, int tamaño) {
-		/*try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}*/
+		/*
+		 * try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
+		 * catch (ClassNotFoundException | InstantiationException |
+		 * IllegalAccessException | UnsupportedLookAndFeelException e) {
+		 * e.printStackTrace(); }
+		 */
 		this.jugador = jugador;
 		this.tamaño = tamaño;
 		this.juego = new Juego(tamaño);
@@ -52,16 +51,16 @@ public class InterfazGrafica {
 
 		// Creo la matriz con los botones correspondientes
 		JPanel panelGrilla = new JPanel(new GridLayout(tamaño, tamaño));
-		
-		//Esto es simplemente para poder usar el Design no le den bola
-		if (tamaño <= 0) {	
-		    throw new IllegalArgumentException("El tamaño de la grilla debe ser mayor que 0");
-		}else {
-			
+
+		// Esto es simplemente para poder usar el Design no le den bola
+		if (tamaño <= 0) {
+			throw new IllegalArgumentException("El tamaño de la grilla debe ser mayor que 0");
+		} else {
+
 			botones = new JButton[tamaño][tamaño];
 
 		}
-		
+
 		for (int i = 0; i < tamaño; i++) {
 			for (int j = 0; j < tamaño; j++) {
 				botones[i][j] = new JButton();
