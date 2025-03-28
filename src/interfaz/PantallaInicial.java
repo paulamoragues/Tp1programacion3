@@ -37,6 +37,7 @@ public class PantallaInicial {
 		nombreField.setBounds(206, 154, 200, 25);
 		frame.getContentPane().add(nombreField);
 
+		
 		// Label y ComboBox para dificultad
 		JLabel dificultadLabel = new JLabel("Elija la dificultad:");
 		dificultadLabel.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -58,6 +59,7 @@ public class PantallaInicial {
 		btnConfirmar.setBounds(142, 314, 200, 77);
 		btnConfirmar.addActionListener(e -> iniciarJuego());
 		frame.getContentPane().add(btnConfirmar);
+		
 
 		frame.setVisible(true);
 	}
@@ -82,6 +84,6 @@ public class PantallaInicial {
 		}
 
 		frame.dispose(); // Cerrar la ventana actual
-		InterfazGrafica juego = new InterfazGrafica(jugador, tamaño); // Creo la interfazGrafica del juego y despues la
+		InterfazGrafica juego = new InterfazGrafica(jugador, tamaño); // Creo la interfazGrafica del juego y despues la											
 	}
 }

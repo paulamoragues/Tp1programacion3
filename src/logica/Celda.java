@@ -5,7 +5,6 @@ import java.util.Random;
 public class Celda {
 	private int color;
 	private static final int coloresPosibles = 6;
-
 	private static final Random rand = new Random();
 
 	public Celda() {
@@ -13,7 +12,6 @@ public class Celda {
 	}
 
 	public void cambiarColor() {
-		Random rand = new Random();
 		this.color = rand.nextInt(coloresPosibles);
 	}
 
@@ -21,7 +19,7 @@ public class Celda {
 		this.color = -1;
 	}
 
-	public int getColor(){
+	public int getColor() {
 		return color;
 	}
 

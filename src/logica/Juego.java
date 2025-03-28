@@ -2,12 +2,6 @@ package logica;
 
 public class Juego {
 	private Grilla grilla;
-	private int turnos; // cantidad de turnos
-	// record
-
-	public Juego() {
-		grilla = new Grilla();
-
 	private int turnos;
 
 	private static int record = Integer.MAX_VALUE; // Static para que no se reinicie
@@ -15,7 +9,6 @@ public class Juego {
 
 	public Juego(int tamaño) {
 		grilla = new Grilla(tamaño);
->>>>>>> Felipe
 		turnos = 0;
 	}
 
@@ -23,22 +16,6 @@ public class Juego {
 		grilla.tocarCelda(fila, columna);
 		turnos++;
 	}
-<<<<<<< HEAD
-	
-	public boolean estaCompleta() {
-		return grilla.estaCompleta();
-	}
-	
-	public int getTurnos() {
-		return turnos;
-	}
-	
-	// ???
-	public int getColorCelda(int fila, int columna) {
-        return grilla.getColorCelda(fila, columna);
-    }
-	
-=======
 
 	public boolean estaCompleta() {
 		return grilla.estaCompleta();
@@ -67,5 +44,4 @@ public class Juego {
 		return grilla.getColorCelda(fila, columna);
 	}
 
->>>>>>> Felipe
 }
