@@ -34,7 +34,8 @@ public class PantallaFinal {
 		frame.getContentPane().add(labelTurnos);
 
 		// Record
-		labelRecord = new JLabel("El Record es de " + Juego.getNombreRecord() + " con " + Juego.getRecord() + " turnos");
+		labelRecord = new JLabel(
+				"El Record es de " + Juego.getNombreRecord() + " con " + Juego.getRecord() + " turnos");
 		labelRecord.setFont(new Font("Arial", Font.PLAIN, 18));
 		labelRecord.setForeground(new Color(255, 255, 255));
 		labelRecord.setBounds(44, 214, 384, 25);
