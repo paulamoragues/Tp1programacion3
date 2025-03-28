@@ -18,14 +18,11 @@ public class InterfazGrafica {
 	private JFrame frame;
 	private JButton[][] botones;
 	private JLabel labelTurnos;
+	private JLabel labelRecord;
 	private int tamaño;
 	private Juego juego;
 	private String jugador;
 
-	/**
-	 * Launch the application.
-	 */
-	// Borre el main ya que no hace falta
 
 	// Create the application.
 	public InterfazGrafica(String jugador, int tamaño) {
@@ -60,6 +57,13 @@ public class InterfazGrafica {
 						juego.jugarTurno(fila, columna);
 						actualizarGrilla();
 						actualizarLabels();
+
+						if (juego.estaCompleta()) {
+							juego.actualizarRecord(jugador);
+							new PantallaFinal(jugador, juego.getTurnos());
+							frame.dispose(); // Cerrar la ventana actual
+						}
+
 					}
 				});
 
@@ -69,9 +73,9 @@ public class InterfazGrafica {
 
 		JPanel panelInfo = new JPanel();
 		labelTurnos = new JLabel("Turnos: 0");
-		// labelRecord = new JLabel("Récord: -");
+		labelRecord = new JLabel("Récord: " + (juego.getRecord() == Integer.MAX_VALUE ? "-" : juego.getRecord()));
 		panelInfo.add(labelTurnos);
-		// panelInfo.add(labelRecord);
+		panelInfo.add(labelRecord);
 
 		frame.add(panelGrilla, BorderLayout.CENTER);
 		frame.add(panelInfo, BorderLayout.SOUTH);
@@ -91,9 +95,8 @@ public class InterfazGrafica {
 
 	private void actualizarLabels() {
 		labelTurnos.setText("Turnos: " + juego.getTurnos());
-		// int record = juego.getRecord();
-		// labelRecord.setText("Récord: " + (record == Integer.MAX_VALUE ? "-" :
-		// record));
+		int record = juego.getRecord();
+		labelRecord.setText("Récord: " + (record == Integer.MAX_VALUE ? "-" : record));
 	}
 
 	private Color obtenerColor(int valor) {
@@ -101,7 +104,4 @@ public class InterfazGrafica {
 		return valor == -1 ? Color.LIGHT_GRAY : colores[valor];
 	}
 
-	public void mostrar() {
-		frame.setVisible(true);
-	}
 }

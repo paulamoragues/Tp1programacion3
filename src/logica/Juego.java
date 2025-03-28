@@ -3,7 +3,9 @@ package logica;
 public class Juego {
 	private Grilla grilla;
 	private int turnos;
-	private int record = Integer.MAX_VALUE;
+
+	private static int record = Integer.MAX_VALUE; // Static para que no se reinicie
+	private static String nombreRecord = ""; // Static para que no se reinicie
 
 	public Juego(int tamaño) {
 		grilla = new Grilla(tamaño);
@@ -13,10 +15,6 @@ public class Juego {
 	public void jugarTurno(int fila, int columna) {
 		grilla.tocarCelda(fila, columna);
 		turnos++;
-
-		/*
-		 * if (grilla.estaCompleta() && turnos < record) { record = turnos; }
-		 */
 	}
 
 	public boolean estaCompleta() {
@@ -27,17 +25,21 @@ public class Juego {
 		return turnos;
 	}
 
-	public int getRecord() {
+	public static int getRecord() {
 		return record;
 	}
 
-	public void actualizarRecord() {
+	public static String getNombreRecord() {
+		return nombreRecord;
+	}
+
+	public void actualizarRecord(String nombreJugador) {
 		if (estaCompleta() && turnos < record) {
 			record = turnos;
+			nombreRecord = nombreJugador;
 		}
 	}
 
-	// ???
 	public int getColorCelda(int fila, int columna) {
 		return grilla.getColorCelda(fila, columna);
 	}

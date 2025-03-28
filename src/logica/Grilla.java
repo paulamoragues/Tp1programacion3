@@ -1,76 +1,77 @@
 package logica;
+
 public class Grilla {
-    private Celda[][] celdas;
-    private int tamaño;
-    
-    public Grilla(int tamaño) {
-    	this.tamaño = tamaño;
-        celdas = new Celda[tamaño][tamaño];
-        for (int i = 0; i < tamaño; i++) {
-            for (int j = 0; j < tamaño; j++) {
-                celdas[i][j] = new Celda();
-            }
-        }
-    }
+	private Celda[][] celdas;
+	private int tamaño;
 
-    public void tocarCelda(int fila, int columna) {
-        Celda celda = celdas[fila][columna];
-        celda.cambiarColor();
+	public Grilla(int tamaño) {
+		this.tamaño = tamaño;
+		celdas = new Celda[tamaño][tamaño];
+		for (int i = 0; i < tamaño; i++) {
+			for (int j = 0; j < tamaño; j++) {
+				celdas[i][j] = new Celda();
+			}
+		}
+	}
 
-        if (tieneVecinoDelMismoColor(fila, columna)) {
-            apagarVecinas(fila, columna);
-        }
-    }
+	public void tocarCelda(int fila, int columna) {
+		Celda celda = celdas[fila][columna];
+		celda.cambiarColor();
 
-    private boolean tieneVecinoDelMismoColor(int fila, int columna) {
-        int color = celdas[fila][columna].getColor();
+		if (tieneVecinoDelMismoColor(fila, columna)) {
+			apagarVecinas(fila, columna);
+		}
+	}
 
-        int[][] direcciones = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        for (int[] dir : direcciones) {
-            int nuevaFila = fila + dir[0];
-            int nuevaCol = columna + dir[1];
+	private boolean tieneVecinoDelMismoColor(int fila, int columna) {
+		int color = celdas[fila][columna].getColor();
 
-            if (esPosicionValida(nuevaFila, nuevaCol)) {
-                if (celdas[nuevaFila][nuevaCol].getColor() == color) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+		int[][] direcciones = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+		for (int[] dir : direcciones) {
+			int nuevaFila = fila + dir[0];
+			int nuevaCol = columna + dir[1];
 
-    private void apagarVecinas(int fila, int columna) {
-        celdas[fila][columna].apagar();
+			if (esPosicionValida(nuevaFila, nuevaCol)) {
+				if (celdas[nuevaFila][nuevaCol].getColor() == color) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-        int[][] direcciones = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        for (int[] dir : direcciones) {
-            int nuevaFila = fila + dir[0];
-            int nuevaCol = columna + dir[1];
+	private void apagarVecinas(int fila, int columna) {
+		celdas[fila][columna].apagar();
 
-            if (esPosicionValida(nuevaFila, nuevaCol)) {
-                celdas[nuevaFila][nuevaCol].apagar();
-            }
-        }
-    }
-    
-    public boolean estaCompleta() {
-        for (int i = 0; i < tamaño; i++) {
-            for (int j = 0; j < tamaño; j++) {
-                if (celdas[i][j].getColor() == -1) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+		int[][] direcciones = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+		for (int[] dir : direcciones) {
+			int nuevaFila = fila + dir[0];
+			int nuevaCol = columna + dir[1];
 
-    private boolean esPosicionValida(int fila, int columna) {
-        return fila >= 0 && fila < tamaño && columna >= 0 && columna < tamaño;
-    }
-    
-    // ???
-    public int getColorCelda(int fila, int columna) {
-        return celdas[fila][columna].getColor();
-    }
-    
+			if (esPosicionValida(nuevaFila, nuevaCol)) {
+				celdas[nuevaFila][nuevaCol].apagar();
+			}
+		}
+	}
+
+	public boolean estaCompleta() {
+		for (int i = 0; i < tamaño; i++) {
+			for (int j = 0; j < tamaño; j++) {
+				if (celdas[i][j].getColor() == -1) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	private boolean esPosicionValida(int fila, int columna) {
+		return fila >= 0 && fila < tamaño && columna >= 0 && columna < tamaño;
+	}
+
+	// ???
+	public int getColorCelda(int fila, int columna) {
+		return celdas[fila][columna].getColor();
+	}
+
 }
