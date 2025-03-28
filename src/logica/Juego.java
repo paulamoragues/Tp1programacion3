@@ -2,13 +2,12 @@ package logica;
 
 public class Juego {
 	private Grilla grilla;
-<<<<<<< HEAD
 	private int turnos; // cantidad de turnos
 	// record
 
 	public Juego() {
 		grilla = new Grilla();
-=======
+
 	private int turnos;
 
 	private static int record = Integer.MAX_VALUE; // Static para que no se reinicie
