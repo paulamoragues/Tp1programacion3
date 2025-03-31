@@ -40,7 +40,7 @@ public class Juego {
 		}
 	}
 
-	public int getColorCelda(int fila, int columna) {
+	public ColorCelda getColorCelda(int fila, int columna) {
 		return grilla.getColorCelda(fila, columna);
 	}
 

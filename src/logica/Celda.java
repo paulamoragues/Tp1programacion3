@@ -1,25 +1,21 @@
 package logica;
 
-import java.util.Random;
-
 public class Celda {
-	private int color;
-	private static final int coloresPosibles = 6;
-	private static final Random rand = new Random();
+	private ColorCelda color;
 
 	public Celda() {
-		this.color = -1; // -1 significa sin color
+		this.color = ColorCelda.GRIS; 
 	}
 
 	public void cambiarColor() {
-		this.color = rand.nextInt(coloresPosibles);
+		this.color = ColorCelda.obtenerColorAleatorio();
 	}
 
 	public void apagar() {
-		this.color = -1;
+		this.color = ColorCelda.GRIS;
 	}
 
-	public int getColor() {
+	public ColorCelda getColor() {
 		return color;
 	}
 

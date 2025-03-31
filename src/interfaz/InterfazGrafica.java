@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import logica.ColorCelda;
 import logica.Juego;
 import java.awt.Font;
 
@@ -110,7 +111,7 @@ public class InterfazGrafica {
 	private void actualizarGrilla() {
 		for (int i = 0; i < tamaño; i++) {
 			for (int j = 0; j < tamaño; j++) {
-				int color = juego.getColorCelda(i, j);
+				ColorCelda color = juego.getColorCelda(i, j);
 				botones[i][j].setBackground(obtenerColor(color));
 			}
 		}
@@ -121,10 +122,24 @@ public class InterfazGrafica {
 		int record = juego.getRecord();
 		labelRecord.setText("Récord: " + (record == Integer.MAX_VALUE ? "-" : record));
 	}
-
-	private Color obtenerColor(int valor) {
-		Color[] colores = { Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.PINK };
-		return valor == -1 ? Color.LIGHT_GRAY : colores[valor];
+	
+	private Color obtenerColor(ColorCelda colorCelda) {
+	    switch (colorCelda) {
+	        case ROJO:
+	            return Color.RED;
+	        case AZUL:
+	            return Color.BLUE;
+	        case VERDE:
+	            return Color.GREEN;
+	        case AMARILLO:
+	            return Color.YELLOW;
+	        case NARANJA:
+	            return Color.ORANGE;
+	        case ROSA:
+	            return Color.PINK;
+	        default:
+	            return Color.LIGHT_GRAY;
+	    }
 	}
 
 }

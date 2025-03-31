@@ -24,7 +24,7 @@ public class Grilla {
 	}
 
 	private boolean tieneVecinoDelMismoColor(int fila, int columna) {
-		int color = celdas[fila][columna].getColor();
+		ColorCelda color = celdas[fila][columna].getColor();
 
 		int[][] direcciones = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
 		for (int[] dir : direcciones) {
@@ -57,7 +57,7 @@ public class Grilla {
 	public boolean estaCompleta() {
 		for (int i = 0; i < tamaño; i++) {
 			for (int j = 0; j < tamaño; j++) {
-				if (celdas[i][j].getColor() == -1) {
+				if (celdas[i][j].getColor() == ColorCelda.GRIS) {
 					return false;
 				}
 			}
@@ -69,8 +69,7 @@ public class Grilla {
 		return fila >= 0 && fila < tamaño && columna >= 0 && columna < tamaño;
 	}
 
-	// ???
-	public int getColorCelda(int fila, int columna) {
+	public ColorCelda getColorCelda(int fila, int columna) {
 		return celdas[fila][columna].getColor();
 	}
 
