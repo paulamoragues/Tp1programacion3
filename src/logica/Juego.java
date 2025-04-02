@@ -44,26 +44,25 @@ public class Juego {
 		return grilla.getColorCelda(fila, columna);
 	}
 	
-	// sugerir celda
+	// te devuelve la mejor celda, osea, la que tiene menos vecinos pintados
 	public int[] sugerirCelda() {
-	    for (int i = 0; i < grilla.getTamaño(); i++) {
-	        for (int j = 0; j < grilla.getTamaño(); j++) {
-	            if (grilla.getColorCelda(i, j) == ColorCelda.GRIS && !grilla.tieneVecinosColoreados(i, j)) {
-	                return new int[]{i, j}; // Retorna la primera celda sin colores adyacentes
-	            }
-	        }
-	    }
+	    int minVecinosColoreados = Integer.MAX_VALUE;
+	    int[] mejorCelda = null;
 
-	    // Si no hay celdas sin colores adyacentes, busca la primera vacía
 	    for (int i = 0; i < grilla.getTamaño(); i++) {
 	        for (int j = 0; j < grilla.getTamaño(); j++) {
 	            if (grilla.getColorCelda(i, j) == ColorCelda.GRIS) {
-	                return new int[]{i, j};
+	                int vecinosColoreados = grilla.contarVecinosColoreados(i, j);
+
+	                if (vecinosColoreados < minVecinosColoreados) {
+	                    minVecinosColoreados = vecinosColoreados;
+	                    mejorCelda = new int[]{i, j};
+	                }
 	            }
 	        }
 	    }
 
-	    return null; // No hay jugadas disponibles
+	    return mejorCelda; 
 	}
 
 
