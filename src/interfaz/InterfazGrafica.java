@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -30,12 +31,6 @@ public class InterfazGrafica {
 
 	// Create the application.
 	public InterfazGrafica(String jugador, int tamaño) {
-		/*try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}*/
 		this.jugador = jugador;
 		this.tamaño = tamaño;
 		this.juego = new Juego(tamaño);
@@ -103,11 +98,20 @@ public class InterfazGrafica {
 
 		frame.getContentPane().add(panelGrilla, BorderLayout.CENTER);
 		frame.getContentPane().add(panelInfo, BorderLayout.SOUTH);
+		
+		
+		// sugerir celda
+		JButton btnSugerir = new JButton("Sugerir");
+		btnSugerir.setFont(new Font("Arial", Font.BOLD, 13));
+		btnSugerir.setBackground(new Color(255, 200, 0));
+		btnSugerir.addActionListener(e -> sugerirJugada());
+
+		panelInfo.add(btnSugerir);
 
 		frame.setVisible(true);
 	}
 
-	// Necesario para mostrar los colores de las celdas
+	// Actualizar la interfaz
 	private void actualizarGrilla() {
 		for (int i = 0; i < tamaño; i++) {
 			for (int j = 0; j < tamaño; j++) {
@@ -122,7 +126,7 @@ public class InterfazGrafica {
 		int record = juego.getRecord();
 		labelRecord.setText("Récord: " + (record == Integer.MAX_VALUE ? "-" : record));
 	}
-	
+
 	private Color obtenerColor(ColorCelda colorCelda) {
 	    switch (colorCelda) {
 	        case ROJO:
@@ -139,6 +143,18 @@ public class InterfazGrafica {
 	            return Color.PINK;
 	        default:
 	            return Color.LIGHT_GRAY;
+	    }
+	}
+	
+	// sugerir celda
+	private void sugerirJugada() {
+	    int[] sugerencia = juego.sugerirCelda();
+	    if (sugerencia != null) {
+	        int fila = sugerencia[0];
+	        int columna = sugerencia[1];
+	        botones[fila][columna].setBackground(Color.DARK_GRAY); // color de la celda sugerida
+	    } else {
+	        JOptionPane.showMessageDialog(frame, "No hay jugadas recomendadas.");
 	    }
 	}
 

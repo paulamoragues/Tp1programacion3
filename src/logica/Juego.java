@@ -43,5 +43,28 @@ public class Juego {
 	public ColorCelda getColorCelda(int fila, int columna) {
 		return grilla.getColorCelda(fila, columna);
 	}
+	
+	// sugerir celda
+	public int[] sugerirCelda() {
+	    for (int i = 0; i < grilla.getTamaño(); i++) {
+	        for (int j = 0; j < grilla.getTamaño(); j++) {
+	            if (grilla.getColorCelda(i, j) == ColorCelda.GRIS && !grilla.tieneVecinosColoreados(i, j)) {
+	                return new int[]{i, j}; // Retorna la primera celda sin colores adyacentes
+	            }
+	        }
+	    }
+
+	    // Si no hay celdas sin colores adyacentes, busca la primera vacía
+	    for (int i = 0; i < grilla.getTamaño(); i++) {
+	        for (int j = 0; j < grilla.getTamaño(); j++) {
+	            if (grilla.getColorCelda(i, j) == ColorCelda.GRIS) {
+	                return new int[]{i, j};
+	            }
+	        }
+	    }
+
+	    return null; // No hay jugadas disponibles
+	}
+
 
 }

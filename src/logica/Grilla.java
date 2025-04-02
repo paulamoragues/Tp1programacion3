@@ -72,5 +72,22 @@ public class Grilla {
 	public ColorCelda getColorCelda(int fila, int columna) {
 		return celdas[fila][columna].getColor();
 	}
+	
+	// sugerir celda
+	public boolean tieneVecinosColoreados(int fila, int columna) {
+	    int[][] direcciones = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+	    for (int[] dir : direcciones) {
+	        int nuevaFila = fila + dir[0];
+	        int nuevaCol = columna + dir[1];
+	        if (esPosicionValida(nuevaFila, nuevaCol) && celdas[nuevaFila][nuevaCol].getColor() != ColorCelda.GRIS) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	
+	public int getTamaño() {
+		return tamaño;
+	}
 
 }
