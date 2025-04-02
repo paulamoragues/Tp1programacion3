@@ -28,7 +28,6 @@ public class InterfazGrafica {
 	private Juego juego;
 	private String jugador;
 
-
 	// Create the application.
 	public InterfazGrafica(String jugador, int tamaño) {
 		this.jugador = jugador;
@@ -53,7 +52,6 @@ public class InterfazGrafica {
 		if (tamaño <= 0) {	
 		    throw new IllegalArgumentException("El tamaño de la grilla debe ser mayor que 0");
 		}else {
-			
 			botones = new JButton[tamaño][tamaño];
 
 		}
@@ -98,7 +96,6 @@ public class InterfazGrafica {
 
 		frame.getContentPane().add(panelGrilla, BorderLayout.CENTER);
 		frame.getContentPane().add(panelInfo, BorderLayout.SOUTH);
-		
 		
 		// sugerir celda
 		JButton btnSugerir = new JButton("Sugerir");

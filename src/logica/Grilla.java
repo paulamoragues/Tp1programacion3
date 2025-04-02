@@ -64,13 +64,9 @@ public class Grilla {
 		}
 		return true;
 	}
-
+	
 	private boolean esPosicionValida(int fila, int columna) {
 		return fila >= 0 && fila < tamaño && columna >= 0 && columna < tamaño;
-	}
-
-	public ColorCelda getColorCelda(int fila, int columna) {
-		return celdas[fila][columna].getColor();
 	}
 	
 	// sugerir celda
@@ -91,6 +87,10 @@ public class Grilla {
 	
 	public int getTamaño() {
 		return tamaño;
+	}
+	
+	public ColorCelda getColorCelda(int fila, int columna) {
+		return celdas[fila][columna].getColor();
 	}
 
 }
