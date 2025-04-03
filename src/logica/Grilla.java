@@ -69,6 +69,7 @@ public class Grilla {
 		return fila >= 0 && fila < tamaño && columna >= 0 && columna < tamaño;
 	}
 	
+	
 	// sugerir celda
 	public int contarVecinosColoreados(int fila, int columna) {
 	    int[][] direcciones = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};

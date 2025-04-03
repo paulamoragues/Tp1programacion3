@@ -45,7 +45,7 @@ public class PantallaInicial {
 		dificultadLabel.setBounds(30, 207, 144, 25);
 		frame.getContentPane().add(dificultadLabel);
 
-		String[] opciones = { "3x3", "5x5", "8x8" };
+		String[] opciones = {  "5x5","3x3", "7x7" };
 		dificultadComboBox = new JComboBox<>(opciones);
 		dificultadComboBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		dificultadComboBox.setBounds(206, 207, 100, 25);
@@ -75,12 +75,12 @@ public class PantallaInicial {
 		// Obtengo la dificultad seleccionada
 		int tamaño = 0;
 		String seleccion = (String) dificultadComboBox.getSelectedItem();
-		if (seleccion.equals("3x3")) {
-			tamaño = 3;
-		} else if (seleccion.equals("5x5")) {
+		if (seleccion.equals("5x5")) {
 			tamaño = 5;
-		} else if (seleccion.equals("8x8")) {
-			tamaño = 8;
+		} else if (seleccion.equals("3x3")) {
+			tamaño = 3;
+		} else if (seleccion.equals("7x7")) {
+			tamaño = 7;
 		}
 
 		frame.dispose(); // Cerrar la ventana actual
