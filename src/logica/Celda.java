@@ -4,7 +4,8 @@ public class Celda {
 	private ColorCelda color;
 
 	public Celda() {
-		this.color = ColorCelda.GRIS; 
+		// Se inicializa en gris (sin color)
+		this.color = ColorCelda.GRIS;
 	}
 
 	public void cambiarColor() {
