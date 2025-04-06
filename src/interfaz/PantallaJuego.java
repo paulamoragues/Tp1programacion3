@@ -2,7 +2,6 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,14 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import logica.ColorCelda;
 import logica.Juego;
 import java.awt.Font;
 
-public class InterfazGrafica {
+public class PantallaJuego {
 	private JFrame frame;
 	private JButton[][] botones;
 	private JLabel labelTurnos;
@@ -29,7 +26,7 @@ public class InterfazGrafica {
 	private String jugador;
 
 	// Create the application.
-	public InterfazGrafica(String jugador, int tamaño) {
+	public PantallaJuego(String jugador, int tamaño) {
 		this.jugador = jugador;
 		this.tamaño = tamaño;
 		this.juego = new Juego(tamaño);
@@ -70,7 +67,7 @@ public class InterfazGrafica {
 						actualizarGrilla();
 						actualizarLabels();
 
-						if (juego.estaCompleta()) {
+						if (juego.seGanoJuego()) {
 							juego.actualizarRecord(jugador);
 							new PantallaFinal(jugador, juego.getTurnos());
 							frame.dispose(); // Cerrar la ventana actual
@@ -112,7 +109,7 @@ public class InterfazGrafica {
 	private void actualizarGrilla() {
 		for (int i = 0; i < tamaño; i++) {
 			for (int j = 0; j < tamaño; j++) {
-				ColorCelda color = juego.getColorCelda(i, j);
+				ColorCelda color = juego.consultarColorCelda(i, j);
 				botones[i][j].setBackground(obtenerColor(color));
 			}
 		}

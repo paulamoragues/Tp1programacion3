@@ -8,8 +8,8 @@ public class Juego {
 	private static String nombreRecord = ""; // Static para que no se reinicie
 
 	public Juego(int tamaño) {
-		grilla = new Grilla(tamaño);
-		turnos = 0;
+		this.grilla = new Grilla(tamaño);
+		this.turnos = 0;
 	}
 
 	public void jugarTurno(int fila, int columna) {
@@ -17,19 +17,23 @@ public class Juego {
 		turnos++;
 	}
 
-	public void actualizarRecord(String nombreJugador) {
-		if (estaCompleta() && turnos < record) {
-			record = turnos;
-			nombreRecord = nombreJugador;
-		}
-	}
-
-	public boolean estaCompleta() {
+	public boolean seGanoJuego() {
 		return grilla.estaCompleta();
 	}
 
-	public ColorCelda getColorCelda(int fila, int columna) {
+	public ColorCelda consultarColorCelda(int fila, int columna) {
 		return grilla.getColorCelda(fila, columna);
+	}
+
+	public int[] sugerirCelda() {
+		return grilla.sugerirMejorCelda();
+	}
+
+	public void actualizarRecord(String nombreJugador) {
+		if (seGanoJuego() && turnos < record) {
+			record = turnos;
+			nombreRecord = nombreJugador;
+		}
 	}
 
 	public int getTurnos() {
@@ -42,30 +46,6 @@ public class Juego {
 
 	public static String getNombreRecord() {
 		return nombreRecord;
-	}
-
-	// sugerir celda
-	// te devuelve la mejor celda, osea, la que tiene menos vecinos pintados
-
-	// ???
-	public int[] sugerirCelda() {
-		int minVecinosColoreados = Integer.MAX_VALUE;
-		int[] mejorCelda = null;
-
-		for (int i = 0; i < grilla.getTamaño(); i++) {
-			for (int j = 0; j < grilla.getTamaño(); j++) {
-				if (grilla.getColorCelda(i, j) == ColorCelda.GRIS) {
-					int vecinosColoreados = grilla.contarVecinosColoreados(i, j);
-
-					if (vecinosColoreados < minVecinosColoreados) {
-						minVecinosColoreados = vecinosColoreados;
-						mejorCelda = new int[] { i, j };
-					}
-				}
-			}
-		}
-
-		return mejorCelda;
 	}
 
 }
