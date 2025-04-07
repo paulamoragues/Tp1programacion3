@@ -2,8 +2,6 @@ package interfaz;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PantallaInicial {
 	private JFrame frame;
@@ -85,6 +83,6 @@ public class PantallaInicial {
 		}
 
 		frame.dispose(); // Cerrar la ventana actual
-		InterfazGrafica juego = new InterfazGrafica(jugador, tamaño); // Creo la interfazGrafica del juego y despues la											
+		PantallaJuego juego = new PantallaJuego(jugador, tamaño); // Creo la interfazGrafica del juego y despues la											
 	}
 }
