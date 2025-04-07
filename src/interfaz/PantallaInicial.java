@@ -34,6 +34,7 @@ public class PantallaInicial {
 		frame.getContentPane().add(labelNombre);
 
 		nombreField = new JTextField();
+		nombreField.setFont(new Font("Arial", Font.BOLD, 18));
 		nombreField.setBounds(206, 154, 200, 25);
 		frame.getContentPane().add(nombreField);
 
