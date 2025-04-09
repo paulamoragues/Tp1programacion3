@@ -14,7 +14,7 @@ public class PantallaFinal {
 		frame.getContentPane().setBackground(new Color(45, 45, 47));
 		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null); 
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 
 		// Ganaste
@@ -32,7 +32,8 @@ public class PantallaFinal {
 		frame.getContentPane().add(labelTurnos);
 
 		// Record
-		labelRecord = new JLabel("El Record es de " + Juego.getNombreRecord() + " con " + Juego.getRecord() + " turnos");
+		labelRecord = new JLabel(
+				"El Record es de " + Juego.getNombreRecord() + " con " + Juego.getRecord() + " turnos");
 		labelRecord.setFont(new Font("Arial", Font.PLAIN, 18));
 		labelRecord.setForeground(new Color(255, 255, 255));
 		labelRecord.setBounds(44, 214, 384, 25);

@@ -3,8 +3,7 @@ package interfaz;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,30 +13,30 @@ import javax.swing.JPanel;
 
 import logica.ColorCelda;
 import logica.Juego;
-import java.awt.Font;
 
 public class PantallaJuego {
 	private JFrame frame;
 	private JButton[][] botones;
 	private JLabel labelTurnos;
 	private JLabel labelRecord;
+	
 	private int tamaño;
 	private Juego juego;
 	private String jugador;
 
 	// Crea la aplicación
 	public PantallaJuego(String jugador, int tamaño) {
-		if (tamaño <= 0) {	
+		if (tamaño <= 0) 
 		    throw new IllegalArgumentException("El tamaño de la grilla debe ser mayor que 0");
-		}
+		
 		this.jugador = jugador;
 		this.tamaño = tamaño;
 		this.juego = new Juego(tamaño);
-		initialize();
+		inicializar();
 	}
 
 	// Inicializa los contenidos del frame
-	private void initialize() {
+	private void inicializar() {
 		frame = new JFrame("Locura Cromática - Jugador: " + jugador);
 		frame.getContentPane().setBackground(new Color(45, 45, 47));
 		frame.setBounds(100, 100, 500, 500);
@@ -47,31 +46,16 @@ public class PantallaJuego {
 
 		// Creo la matriz con los botones correspondientes
 		JPanel panelGrilla = new JPanel(new GridLayout(tamaño, tamaño));
-		
-		botones = new JButton[tamaño][tamaño];	
+		botones = new JButton[tamaño][tamaño];		
 		for (int i = 0; i < tamaño; i++) {
 			for (int j = 0; j < tamaño; j++) {
-				botones[i][j] = new JButton();
-				botones[i][j].setBackground(Color.LIGHT_GRAY);
 				final int fila = i;
 				final int columna = j;
 
-				// Le agrego la accion a los botones
-				botones[i][j].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						juego.jugarTurno(fila, columna);
-						actualizarGrilla();
-						actualizarLabels();
-
-						if (juego.seGanoJuego()) {
-							juego.actualizarRecord(jugador);
-							new PantallaFinal(jugador, juego.getTurnos());
-							frame.dispose(); // Cerrar la ventana actual
-						}
-
-					}
-				});
-
+				botones[i][j] = new JButton();
+				botones[i][j].setBackground(Color.LIGHT_GRAY);
+				botones[i][j].addActionListener(e -> manejarTurno(fila, columna));
+				
 				panelGrilla.add(botones[i][j]);
 			}
 		}
@@ -102,6 +86,18 @@ public class PantallaJuego {
 		frame.getContentPane().add(panelInfo, BorderLayout.SOUTH);
 		frame.setVisible(true);
 	}
+	
+    private void manejarTurno(int fila, int columna) {
+        juego.jugarTurno(fila, columna);
+        actualizarGrilla();
+        actualizarLabels();
+
+        if (juego.seGanoJuego()) {
+            juego.actualizarRecord(jugador);
+            new PantallaFinal(jugador, juego.getTurnos());
+            frame.dispose();
+        }
+    }
 
 	// Actualizar la interfaz
 	private void actualizarGrilla() {
@@ -118,7 +114,19 @@ public class PantallaJuego {
 		labelTurnos.setText("Turnos: " + juego.getTurnos());
 		labelRecord.setText("Récord: " + (Juego.getRecord() == Integer.MAX_VALUE ? "-" : Juego.getRecord()));
 	}
-
+	
+	// Sugerir celda
+	private void sugerirJugada() {
+	    int[] sugerencia = juego.sugerirCelda();
+	    if (sugerencia != null) {
+	        int fila = sugerencia[0];
+	        int columna = sugerencia[1];
+	        botones[fila][columna].setBackground(Color.DARK_GRAY); // Color de la celda sugerida
+	    } else {
+	        JOptionPane.showMessageDialog(frame, "No hay jugadas recomendadas.");
+	    }
+	}
+	
 	private Color obtenerColor(ColorCelda colorCelda) {
 	    switch (colorCelda) {
 	        case ROJO:
@@ -135,18 +143,6 @@ public class PantallaJuego {
 	            return Color.PINK;
 	        default:
 	            return Color.LIGHT_GRAY;
-	    }
-	}
-	
-	// Sugerir celda
-	private void sugerirJugada() {
-	    int[] sugerencia = juego.sugerirCelda();
-	    if (sugerencia != null) {
-	        int fila = sugerencia[0];
-	        int columna = sugerencia[1];
-	        botones[fila][columna].setBackground(Color.DARK_GRAY); // color de la celda sugerida
-	    } else {
-	        JOptionPane.showMessageDialog(frame, "No hay jugadas recomendadas.");
 	    }
 	}
 

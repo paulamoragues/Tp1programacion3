@@ -14,7 +14,7 @@ public class PantallaInicial {
 		frame.getContentPane().setBackground(new Color(45, 45, 47));
 		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null); 
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 
 		// Texto bienvenida
@@ -43,7 +43,7 @@ public class PantallaInicial {
 		dificultadLabel.setBounds(30, 207, 144, 25);
 		frame.getContentPane().add(dificultadLabel);
 
-		String[] opciones = {  "5x5","3x3", "7x7" };
+		String[] opciones = { "5x5", "3x3", "7x7" };
 		dificultadComboBox = new JComboBox<>(opciones);
 		dificultadComboBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		dificultadComboBox.setBounds(206, 207, 100, 25);
@@ -72,17 +72,17 @@ public class PantallaInicial {
 		int tamaño = obtenerTamañoSeleccionado();
 
 		frame.dispose(); // Cerrar la ventana actual
-		new PantallaJuego(jugador, tamaño); // Creo la pantalla del juego 										
+		new PantallaJuego(jugador, tamaño); // Creo la pantalla del juego
 	}
-	
+
 	private int obtenerTamañoSeleccionado() {
 		String seleccion = (String) dificultadComboBox.getSelectedItem();
 		if (seleccion.equals("5x5")) {
 			return 5;
-		} 
+		}
 		if (seleccion.equals("3x3")) {
 			return 3;
-		} 
+		}
 		if (seleccion.equals("7x7")) {
 			return 7;
 		}
