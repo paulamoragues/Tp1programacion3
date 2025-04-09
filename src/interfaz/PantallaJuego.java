@@ -25,34 +25,30 @@ public class PantallaJuego {
 	private Juego juego;
 	private String jugador;
 
-	// Create the application.
+	// Crea la aplicación
 	public PantallaJuego(String jugador, int tamaño) {
+		if (tamaño <= 0) {	
+		    throw new IllegalArgumentException("El tamaño de la grilla debe ser mayor que 0");
+		}
 		this.jugador = jugador;
 		this.tamaño = tamaño;
 		this.juego = new Juego(tamaño);
 		initialize();
 	}
 
-	// Initialize the contents of the frame.
+	// Inicializa los contenidos del frame
 	private void initialize() {
 		frame = new JFrame("Locura Cromática - Jugador: " + jugador);
 		frame.getContentPane().setBackground(new Color(45, 45, 47));
 		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);// aparezca la ventana en el medio
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new BorderLayout());
 
 		// Creo la matriz con los botones correspondientes
 		JPanel panelGrilla = new JPanel(new GridLayout(tamaño, tamaño));
 		
-		//Esto es simplemente para poder usar el Design no le den bola
-		if (tamaño <= 0) {	
-		    throw new IllegalArgumentException("El tamaño de la grilla debe ser mayor que 0");
-		}else {
-			botones = new JButton[tamaño][tamaño];
-
-		}
-		
+		botones = new JButton[tamaño][tamaño];	
 		for (int i = 0; i < tamaño; i++) {
 			for (int j = 0; j < tamaño; j++) {
 				botones[i][j] = new JButton();
@@ -82,26 +78,28 @@ public class PantallaJuego {
 
 		JPanel panelInfo = new JPanel();
 		panelInfo.setBackground(new Color(45, 45, 47));
+		
+		// Turnos
 		labelTurnos = new JLabel("Turnos: 0");
 		labelTurnos.setFont(new Font("Arial", Font.BOLD, 13));
 		labelTurnos.setForeground(new Color(255, 255, 255));
-		labelRecord = new JLabel("Récord: " + (juego.getRecord() == Integer.MAX_VALUE ? "-" : juego.getRecord()));
+		panelInfo.add(labelTurnos);
+		
+		// Record
+		labelRecord = new JLabel("Récord: " + (Juego.getRecord() == Integer.MAX_VALUE ? "-" : Juego.getRecord()));
 		labelRecord.setFont(new Font("Arial", Font.BOLD, 13));
 		labelRecord.setForeground(new Color(255, 255, 255));
-		panelInfo.add(labelTurnos);
 		panelInfo.add(labelRecord);
-
-		frame.getContentPane().add(panelGrilla, BorderLayout.CENTER);
-		frame.getContentPane().add(panelInfo, BorderLayout.SOUTH);
 		
-		// sugerir celda
+		// Sugerir celda
 		JButton btnSugerir = new JButton("Sugerir");
 		btnSugerir.setFont(new Font("Arial", Font.BOLD, 13));
 		btnSugerir.setBackground(new Color(255, 200, 0));
 		btnSugerir.addActionListener(e -> sugerirJugada());
-
 		panelInfo.add(btnSugerir);
 
+		frame.getContentPane().add(panelGrilla, BorderLayout.CENTER);
+		frame.getContentPane().add(panelInfo, BorderLayout.SOUTH);
 		frame.setVisible(true);
 	}
 
@@ -115,10 +113,10 @@ public class PantallaJuego {
 		}
 	}
 
+	// Actualizar los labels
 	private void actualizarLabels() {
 		labelTurnos.setText("Turnos: " + juego.getTurnos());
-		int record = juego.getRecord();
-		labelRecord.setText("Récord: " + (record == Integer.MAX_VALUE ? "-" : record));
+		labelRecord.setText("Récord: " + (Juego.getRecord() == Integer.MAX_VALUE ? "-" : Juego.getRecord()));
 	}
 
 	private Color obtenerColor(ColorCelda colorCelda) {
@@ -140,7 +138,7 @@ public class PantallaJuego {
 	    }
 	}
 	
-	// sugerir celda
+	// Sugerir celda
 	private void sugerirJugada() {
 	    int[] sugerencia = juego.sugerirCelda();
 	    if (sugerencia != null) {

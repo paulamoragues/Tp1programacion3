@@ -14,10 +14,10 @@ public class PantallaInicial {
 		frame.getContentPane().setBackground(new Color(45, 45, 47));
 		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);// aparezca la ventana en el medio
+		frame.setLocationRelativeTo(null); 
 		frame.getContentPane().setLayout(null);
 
-		// Texto Bienvenida
+		// Texto bienvenida
 		JLabel labelBienvenida = new JLabel("LOCURA CROMATICA");
 		labelBienvenida.setForeground(new Color(255, 255, 255));
 		labelBienvenida.setFont(new Font("Arial", Font.BOLD, 26));
@@ -36,9 +36,8 @@ public class PantallaInicial {
 		nombreField.setBounds(206, 154, 200, 25);
 		frame.getContentPane().add(nombreField);
 
-		
 		// Label y ComboBox para dificultad
-		JLabel dificultadLabel = new JLabel("Elija la dificultad:");
+		JLabel dificultadLabel = new JLabel("Elija la dificultad: ");
 		dificultadLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 		dificultadLabel.setForeground(new Color(255, 255, 255));
 		dificultadLabel.setBounds(30, 207, 144, 25);
@@ -50,7 +49,7 @@ public class PantallaInicial {
 		dificultadComboBox.setBounds(206, 207, 100, 25);
 		frame.getContentPane().add(dificultadComboBox);
 
-		// Botón "Iniciar Juego"
+		// Botón "iniciar juego"
 		btnConfirmar = new JButton("Iniciar Juego");
 		btnConfirmar.setForeground(new Color(0, 0, 0));
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -58,7 +57,6 @@ public class PantallaInicial {
 		btnConfirmar.setBounds(142, 314, 200, 77);
 		btnConfirmar.addActionListener(e -> iniciarJuego());
 		frame.getContentPane().add(btnConfirmar);
-		
 
 		frame.setVisible(true);
 	}
@@ -70,19 +68,24 @@ public class PantallaInicial {
 			JOptionPane.showMessageDialog(frame, "Por favor, ingrese un nombre");
 			return;
 		}
-
 		// Obtengo la dificultad seleccionada
-		int tamaño = 0;
-		String seleccion = (String) dificultadComboBox.getSelectedItem();
-		if (seleccion.equals("5x5")) {
-			tamaño = 5;
-		} else if (seleccion.equals("3x3")) {
-			tamaño = 3;
-		} else if (seleccion.equals("7x7")) {
-			tamaño = 7;
-		}
+		int tamaño = obtenerTamañoSeleccionado();
 
 		frame.dispose(); // Cerrar la ventana actual
-		PantallaJuego juego = new PantallaJuego(jugador, tamaño); // Creo la interfazGrafica del juego y despues la											
+		new PantallaJuego(jugador, tamaño); // Creo la pantalla del juego 										
+	}
+	
+	private int obtenerTamañoSeleccionado() {
+		String seleccion = (String) dificultadComboBox.getSelectedItem();
+		if (seleccion.equals("5x5")) {
+			return 5;
+		} 
+		if (seleccion.equals("3x3")) {
+			return 3;
+		} 
+		if (seleccion.equals("7x7")) {
+			return 7;
+		}
+		return 5; // por defecto
 	}
 }

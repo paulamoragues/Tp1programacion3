@@ -1,25 +1,23 @@
 package interfaz;
 
 import javax.swing.*;
-
-import logica.Juego;
-
 import java.awt.*;
+import logica.Juego;
 
 public class PantallaFinal {
 	private JFrame frame;
 	private JLabel labelTurnos;
 	private JLabel labelRecord;
 
-	public PantallaFinal(String jugador, int turnos) {// le paso el jugadro y la cantidad de turnos
+	public PantallaFinal(String jugador, int turnos) { // Le paso el jugador y la cantidad de turnos
 		frame = new JFrame("Locura Cromática - ¡GANASTE!");
 		frame.getContentPane().setBackground(new Color(45, 45, 47));
 		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);// aparezca la ventana en el medio
+		frame.setLocationRelativeTo(null); 
 		frame.getContentPane().setLayout(null);
 
-		// GANASTE
+		// Ganaste
 		JLabel labelVictoria = new JLabel("¡Felicidades " + jugador + " Ganaste!");
 		labelVictoria.setForeground(new Color(255, 255, 255));
 		labelVictoria.setFont(new Font("Arial", Font.BOLD, 24));
