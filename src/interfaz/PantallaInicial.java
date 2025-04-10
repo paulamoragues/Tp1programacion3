@@ -71,7 +71,7 @@ public class PantallaInicial {
 		// Obtengo la dificultad seleccionada
 		int tamaño = obtenerTamañoSeleccionado();
 
-		frame.dispose(); // Cerrar la ventana actual
+		frame.dispose(); 
 		new PantallaJuego(jugador, tamaño); // Creo la pantalla del juego
 	}
 
@@ -79,11 +79,9 @@ public class PantallaInicial {
 		String seleccion = (String) dificultadComboBox.getSelectedItem();
 		if (seleccion.equals("5x5")) {
 			return 5;
-		}
-		if (seleccion.equals("3x3")) {
+		}else if (seleccion.equals("3x3")) {
 			return 3;
-		}
-		if (seleccion.equals("7x7")) {
+		}else if (seleccion.equals("7x7")) {
 			return 7;
 		}
 		return 5; // por defecto

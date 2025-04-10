@@ -29,8 +29,8 @@ public class PantallaJuego {
 		if (tamaño <= 0) 
 		    throw new IllegalArgumentException("El tamaño de la grilla debe ser mayor que 0");
 		
-		this.jugador = jugador;
 		this.tamaño = tamaño;
+		this.jugador = jugador;
 		this.juego = new Juego(tamaño);
 		inicializar();
 	}
@@ -44,21 +44,8 @@ public class PantallaJuego {
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new BorderLayout());
 
-		// Creo la matriz con los botones correspondientes
-		JPanel panelGrilla = new JPanel(new GridLayout(tamaño, tamaño));
-		botones = new JButton[tamaño][tamaño];		
-		for (int i = 0; i < tamaño; i++) {
-			for (int j = 0; j < tamaño; j++) {
-				final int fila = i;
-				final int columna = j;
-
-				botones[i][j] = new JButton();
-				botones[i][j].setBackground(Color.LIGHT_GRAY);
-				botones[i][j].addActionListener(e -> manejarTurno(fila, columna));
-				
-				panelGrilla.add(botones[i][j]);
-			}
-		}
+		// Grilla de botones
+		frame.getContentPane().add(crearPanelGrilla(), BorderLayout.CENTER);
 
 		JPanel panelInfo = new JPanel();
 		panelInfo.setBackground(new Color(45, 45, 47));
@@ -81,12 +68,31 @@ public class PantallaJuego {
 		btnSugerir.setBackground(new Color(255, 200, 0));
 		btnSugerir.addActionListener(e -> sugerirJugada());
 		panelInfo.add(btnSugerir);
-
-		frame.getContentPane().add(panelGrilla, BorderLayout.CENTER);
+		
 		frame.getContentPane().add(panelInfo, BorderLayout.SOUTH);
+		
 		frame.setVisible(true);
 	}
 	
+	private JPanel crearPanelGrilla() {
+		JPanel panelGrilla = new JPanel(new GridLayout(tamaño, tamaño));
+		botones = new JButton[tamaño][tamaño];		
+		for (int i = 0; i < tamaño; i++) {
+			for (int j = 0; j < tamaño; j++) {
+				final int fila = i;
+				final int columna = j;
+
+				botones[i][j] = new JButton();
+				botones[i][j].setBackground(Color.LIGHT_GRAY);
+				botones[i][j].addActionListener(e -> manejarTurno(fila, columna));
+				
+				panelGrilla.add(botones[i][j]);
+			}
+		}	
+		return panelGrilla;
+	}
+	
+	// Accion al tocar una celda
     private void manejarTurno(int fila, int columna) {
         juego.jugarTurno(fila, columna);
         actualizarGrilla();
@@ -94,10 +100,23 @@ public class PantallaJuego {
 
         if (juego.seGanoJuego()) {
             juego.actualizarRecord(jugador);
+            
             new PantallaFinal(jugador, juego.getTurnos());
             frame.dispose();
         }
     }
+    
+	// Accion al tocar botón sugerirCelda
+	private void sugerirJugada() {
+	    int[] sugerencia = juego.sugerirCelda();
+	    if (sugerencia != null) {
+	        int fila = sugerencia[0];
+	        int columna = sugerencia[1];
+	        botones[fila][columna].setBackground(Color.DARK_GRAY); // Color de la celda sugerida
+	    } else {
+	        JOptionPane.showMessageDialog(frame, "No hay jugadas recomendadas.");
+	    }
+	}
 
 	// Actualizar la interfaz
 	private void actualizarGrilla() {
@@ -115,35 +134,8 @@ public class PantallaJuego {
 		labelRecord.setText("Récord: " + (Juego.getRecord() == Integer.MAX_VALUE ? "-" : Juego.getRecord()));
 	}
 	
-	// Sugerir celda
-	private void sugerirJugada() {
-	    int[] sugerencia = juego.sugerirCelda();
-	    if (sugerencia != null) {
-	        int fila = sugerencia[0];
-	        int columna = sugerencia[1];
-	        botones[fila][columna].setBackground(Color.DARK_GRAY); // Color de la celda sugerida
-	    } else {
-	        JOptionPane.showMessageDialog(frame, "No hay jugadas recomendadas.");
-	    }
-	}
-	
 	private Color obtenerColor(ColorCelda colorCelda) {
-	    switch (colorCelda) {
-	        case ROJO:
-	            return Color.RED;
-	        case AZUL:
-	            return Color.BLUE;
-	        case VERDE:
-	            return Color.GREEN;
-	        case AMARILLO:
-	            return Color.YELLOW;
-	        case NARANJA:
-	            return Color.ORANGE;
-	        case ROSA:
-	            return Color.PINK;
-	        default:
-	            return Color.LIGHT_GRAY;
-	    }
+	    return colorCelda != null ? colorCelda.getColor() : Color.LIGHT_GRAY;
 	}
 
 }
